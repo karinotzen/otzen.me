@@ -30,9 +30,38 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Playful background elements */
+        body::before,
+        body::after {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.45;
+            z-index: 0;
+        }
+
+        body::before {
+            top: -120px;
+            left: -120px;
+            background: #7dd3fc; /* sky-300 */
+        }
+
+        body::after {
+            bottom: -140px;
+            right: -140px;
+            background: #a5b4fc; /* indigo-300 */
         }
 
         .container {
+            position: relative;
+            z-index: 1;
             max-width: 560px;
             width: 100%;
             background-color: var(--card-color);
@@ -91,9 +120,57 @@
                 font-size: 1.85rem;
             }
         }
+            /* Floating tool shapes */
+        .tool {
+            position: absolute;
+            opacity: 0.22;
+            fill: rgba(14, 165, 233, 0.25);
+            stroke: #0284c7; /* sky-600 */
+            stroke-width: 3.5;
+            z-index: 0;
+            animation: float 22s ease-in-out infinite;
+            filter: drop-shadow(0 6px 12px rgba(2, 132, 199, 0.25));
+        }
+
+        .tool.small { width: 48px; }
+        .tool.medium { width: 72px; }
+        .tool.large { width: 96px; }
+
+        .tool.hammer { top: 15%; left: 10%; animation-duration: 22s; }
+        .tool.wrench { top: 65%; left: 18%; animation-duration: 26s; }
+        .tool.screwdriver { top: 20%; right: 14%; animation-duration: 24s; }
+        .tool.gear { bottom: 18%; right: 12%; animation-duration: 30s; }
+
+        @keyframes float {
+            0%   { transform: translateY(0) rotate(-2deg); }
+            50%  { transform: translateY(-22px) rotate(3deg); }
+            100% { transform: translateY(0) rotate(-2deg); }
+        }
+            50%  { transform: translateY(-18px) rotate(4deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
     </style>
 </head>
 <body>
+    <!-- Floating background tools -->
+    <svg class="tool hammer medium" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M40 4l-8 8 8 8 8-8-8-8z" />
+        <path d="M34 20L6 48l10 10 28-28" />
+    </svg>
+
+    <svg class="tool wrench large" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M40 6c-4 0-8 2-10 4l8 8-20 20 6 6 20-20 8 8c2-2 4-6 4-10 0-9-7-16-16-16z" />
+    </svg>
+
+    <svg class="tool screwdriver small" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M28 4h8v12h-8z" />
+        <path d="M24 16l16 16-20 28-12-12z" />
+    </svg>
+
+    <svg class="tool gear medium" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M36 2l2 8 8 2-2 8 2 8-8 2-2 8h-8l-2-8-8-2 2-8-2-8 8-2 2-8z" />
+        <circle cx="32" cy="32" r="7" />
+    </svg>
     <main class="container">
         <div class="status">Under Construction</div>
         <h1>Welcome to <span>otzen.me</span></h1>
